@@ -15,12 +15,12 @@
         <dependency>
             <groupId>com.bjsxt.ego</groupId>
             <artifactId>ego-rpc-mapper</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.bjsxt.ego</groupId>
             <artifactId>ego-rpc-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
