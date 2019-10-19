@@ -4,10 +4,8 @@ import com.bjsxt.ego.beans.EgoResult;
 import com.bjsxt.ego.beans.PageResult;
 import com.bjsxt.ego.rpc.mapper.TbItemDescMapper;
 import com.bjsxt.ego.rpc.mapper.TbItemMapper;
-import com.bjsxt.ego.rpc.pojo.TbItem;
-import com.bjsxt.ego.rpc.pojo.TbItemDesc;
-import com.bjsxt.ego.rpc.pojo.TbItemDescExample;
-import com.bjsxt.ego.rpc.pojo.TbItemExample;
+import com.bjsxt.ego.rpc.mapper.TbItemParamItemMapper;
+import com.bjsxt.ego.rpc.pojo.*;
 import com.bjsxt.ego.rpc.service.ItemService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -29,7 +27,8 @@ public class ItemServiceImpl implements ItemService {
     //注入商品描述表的接口对象
     @Autowired
     private TbItemDescMapper tbItemDescMapper;
-
+    @Autowired
+    private TbItemParamItemMapper tbItemParamItemMapper;
     /**
      * 商品分页查询
      * @param page
@@ -95,10 +94,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public EgoResult saveItem(TbItem item, TbItemDesc desc) {
+    public EgoResult saveItem(TbItem item, TbItemDesc desc, TbItemParamItem itemParamItem) {
 
         tbItemMapper.insert(item);//插入商品
-        tbItemDescMapper.insert(desc);//插入商品描述信息
+        tbItemDescMapper.insert(desc);//插入商品描述信息d
+        tbItemParamItemMapper.insert(itemParamItem);
         return EgoResult.ok();
     }
 

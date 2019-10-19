@@ -49,7 +49,7 @@ public interface ManagerItemService {
      * @param desc 商品描述
      * @return
      */
-    public EgoResult saveItemService(TbItem item,String desc);
+    public EgoResult saveItemService(TbItem item,String desc,String paramData);
 
     /**
      * 完成商品详细信息的更新

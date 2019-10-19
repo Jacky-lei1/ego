@@ -4,7 +4,10 @@ import com.bjsxt.ego.beans.*;
 import com.bjsxt.ego.manager.service.ManagerItemService;
 import com.bjsxt.ego.rpc.pojo.TbItem;
 import com.bjsxt.ego.rpc.pojo.TbItemDesc;
+import com.bjsxt.ego.rpc.pojo.TbItemParam;
+import com.bjsxt.ego.rpc.pojo.TbItemParamItem;
 import com.bjsxt.ego.rpc.service.ItemService;
+import javafx.scene.control.Tab;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -141,7 +144,7 @@ public class ManagerItemServiceImpl implements ManagerItemService {
      * @return
      */
     @Override
-    public EgoResult saveItemService(TbItem item, String desc) {
+    public EgoResult saveItemService(TbItem item, String desc,String paramData) {
         //给Item对象封装数据:弥补从前台中获取到的数据不足，
         //通过工具类自己产生id，满足后期的MyCat分库分表的需求，
         // 因为MyCat分库分表时如果设置主键自增，那么每张分表的ID都会从1开始自增，那么就会造成ID重复的问题
@@ -151,21 +154,26 @@ public class ManagerItemServiceImpl implements ManagerItemService {
         item.setId(id);
         //设置状态
         item.setStatus((byte) 1);
-        Date data = new Date();
+        Date date = new Date();
         //创建时间
-        item.setCreated(data);
+        item.setCreated(date);
         //更新时间
-        item.setUpdated(data);
+        item.setUpdated(date);
 
         //创建TbItemDesc对象(商品描述表对象)
         TbItemDesc tbItemDesc = new TbItemDesc();
         tbItemDesc.setItemDesc(desc);
         tbItemDesc.setItemId(id);
-        tbItemDesc.setCreated(data);
-        tbItemDesc.setUpdated(data);
+        tbItemDesc.setCreated(date);
+        tbItemDesc.setUpdated(date);
 
         //调用远程服务实现商品信息的发布
-        return itemServiceProxy.saveItem(item,tbItemDesc);
+        TbItemParamItem tbItemParamItem = new TbItemParamItem();
+        tbItemParamItem.setItemId(id);
+        tbItemParamItem.setParamData(paramData);
+        tbItemParamItem.setCreated(date);
+        tbItemParamItem.setUpdated(date);
+        return itemServiceProxy.saveItem(item,tbItemDesc,tbItemParamItem);
     }
 
     @Override

@@ -4,6 +4,8 @@ import com.bjsxt.ego.beans.EgoResult;
 import com.bjsxt.ego.beans.PageResult;
 import com.bjsxt.ego.rpc.pojo.TbItem;
 import com.bjsxt.ego.rpc.pojo.TbItemDesc;
+import com.bjsxt.ego.rpc.pojo.TbItemParam;
+import com.bjsxt.ego.rpc.pojo.TbItemParamItem;
 
 import java.util.List;
 
@@ -40,7 +42,7 @@ public interface ItemService {
      * @param desc：商品描述对象
      * @return
      */
-    public EgoResult saveItem(TbItem item, TbItemDesc desc);
+    public EgoResult saveItem(TbItem item, TbItemDesc desc, TbItemParamItem itemParamItem);
 
 
     /**

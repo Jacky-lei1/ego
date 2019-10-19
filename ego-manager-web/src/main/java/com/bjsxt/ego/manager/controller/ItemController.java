@@ -75,8 +75,8 @@ public class ItemController {
      */
     @RequestMapping(value = "item/save",produces = MediaType.APPLICATION_JSON_VALUE+";charset=UTF-8")
     @ResponseBody
-    public EgoResult itemSave(TbItem item,String desc){
-        return managerItemService.saveItemService(item,desc);
+    public EgoResult itemSave(TbItem item,String desc,String itemParams){
+        return managerItemService.saveItemService(item,desc,itemParams);
     }
 
 
