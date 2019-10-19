@@ -6,6 +6,7 @@ import com.bjsxt.ego.rpc.mapper.TbItemDescMapper;
 import com.bjsxt.ego.rpc.mapper.TbItemMapper;
 import com.bjsxt.ego.rpc.pojo.TbItem;
 import com.bjsxt.ego.rpc.pojo.TbItemDesc;
+import com.bjsxt.ego.rpc.pojo.TbItemDescExample;
 import com.bjsxt.ego.rpc.pojo.TbItemExample;
 import com.bjsxt.ego.rpc.service.ItemService;
 import com.github.pagehelper.Page;
@@ -27,7 +28,7 @@ public class ItemServiceImpl implements ItemService {
     private TbItemMapper tbItemMapper;
     //注入商品描述表的接口对象
     @Autowired
-    private TbItemDescMapper tbItemMapperDesc;
+    private TbItemDescMapper tbItemDescMapper;
 
     /**
      * 商品分页查询
@@ -97,14 +98,41 @@ public class ItemServiceImpl implements ItemService {
     public EgoResult saveItem(TbItem item, TbItemDesc desc) {
 
         tbItemMapper.insert(item);//插入商品
-        tbItemMapperDesc.insert(desc);//插入商品描述信息
+        tbItemDescMapper.insert(desc);//插入商品描述信息
         return EgoResult.ok();
     }
 
+    /**
+     * 更新商品信息
+     * @param item：商品对象
+     * @param desc：商品描述对象
+     * @return
+     */
     @Override
     public EgoResult updateItem(TbItem item, TbItemDesc desc) {
-        this.tbItemMapper.updateByPrimaryKey(item);
+        //更新商品基本信息
+        //updateByPrimaryKeySelective:如果某个特定的属性列是空的则不会进行更新
+        //updateByPrimaryKey:表示对所有属性进行更新
+        this.tbItemMapper.updateByPrimaryKeySelective(item);
 
-        return null;
+        TbItemDescExample example = new TbItemDescExample();
+        TbItemDescExample.Criteria criteria = example.createCriteria();
+        criteria.andItemIdEqualTo(desc.getItemId());
+
+        //where itemId = ?
+        //查询某个商品对应的描述信息,统计where条件所满足的记录数
+        Integer rows = tbItemDescMapper.countByExample(example);
+        //判断该商品是否存在描述信息
+        if(rows==0){
+            //如果没有描述信息则执行添加操作
+            this.tbItemDescMapper.insert(desc);
+        }else {
+            //如果有描述信息则设为空
+            desc.setCreated(null);
+            //如果这列为空则不会进行更新
+            this.tbItemDescMapper.updateByPrimaryKeySelective(desc);
+        }
+
+        return EgoResult.ok();
     }
 }

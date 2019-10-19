@@ -20,4 +20,6 @@
 	 <dubbo:service interface="com.bjsxt.ego.rpc.service.ItemService" ref="itemServiceImpl"></dubbo:service>
 	 <dubbo:service interface="com.bjsxt.ego.rpc.service.ItemCatService" ref="itemCatServiceImpl"></dubbo:service>
 	 <dubbo:service interface="com.bjsxt.ego.rpc.service.ItemDescService" ref="itemDescServiceImpl"></dubbo:service>
+	 <dubbo:service interface="com.bjsxt.ego.rpc.service.ItemParamService" ref="itemParamServiceImpl"></dubbo:service>
+
 </beans>

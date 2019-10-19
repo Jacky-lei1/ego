@@ -80,4 +80,14 @@ public class ItemController {
     }
 
 
+    /**
+     * 处理商品信息的更新请求
+     */
+    @RequestMapping(value = "item/update",produces = MediaType.APPLICATION_JSON_VALUE+";charset=UTF-8")
+    @ResponseBody
+    public EgoResult itemUpdate(TbItem item,String desc){
+        return managerItemService.updateItemService(item,desc);
+    }
+
+
 }

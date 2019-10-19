@@ -167,4 +167,22 @@ public class ManagerItemServiceImpl implements ManagerItemService {
         //调用远程服务实现商品信息的发布
         return itemServiceProxy.saveItem(item,tbItemDesc);
     }
+
+    @Override
+    public EgoResult updateItemService(TbItem item, String desc) {
+
+        Date date = new Date();
+
+        //给item对象封装数据,之前的数据已经存在TbItem对象中了，直接设置更新时间即可
+        item.setUpdated(date);
+        //创建TbItemDesc对象(商品描述表对象)
+        TbItemDesc tbItemDesc = new TbItemDesc();
+        tbItemDesc.setItemDesc(desc);
+        tbItemDesc.setItemId(item.getId());
+        tbItemDesc.setCreated(date);
+        tbItemDesc.setUpdated(date);
+
+        //调用远程服务实现商品信息的发布
+        return itemServiceProxy.updateItem(item,tbItemDesc);
+    }
 }

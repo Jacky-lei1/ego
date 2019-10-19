@@ -36,5 +36,11 @@ public class PageResult<T> implements Serializable {
         this.total = total;
     }
 
-
+    @Override
+    public String toString() {
+        return "PageResult{" +
+                "rows=" + rows +
+                ", total=" + total +
+                '}';
+    }
 }
