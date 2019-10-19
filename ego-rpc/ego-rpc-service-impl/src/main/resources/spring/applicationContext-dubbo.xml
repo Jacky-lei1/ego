@@ -19,5 +19,5 @@
 	 <!-- 发布dubbo服务,引用具体的实现类对象，实现类对象已经通过注解扫描纳入了Spring容器中，默认就是类名首字母小写 -->
 	 <dubbo:service interface="com.bjsxt.ego.rpc.service.ItemService" ref="itemServiceImpl"></dubbo:service>
 	 <dubbo:service interface="com.bjsxt.ego.rpc.service.ItemCatService" ref="itemCatServiceImpl"></dubbo:service>
-
+	 <dubbo:service interface="com.bjsxt.ego.rpc.service.ItemDescService" ref="itemDescServiceImpl"></dubbo:service>
 </beans>

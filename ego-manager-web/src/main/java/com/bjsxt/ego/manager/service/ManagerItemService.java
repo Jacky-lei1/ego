@@ -42,4 +42,13 @@ public interface ManagerItemService {
      */
     public PictureResult uploadItemPic(MultipartFile file);
 
+
+    /**
+     * 完成商品详细信息的发布
+     * @param item 商品对象
+     * @param desc 商品描述
+     * @return
+     */
+    public EgoResult saveItemService(TbItem item,String desc);
+
 }

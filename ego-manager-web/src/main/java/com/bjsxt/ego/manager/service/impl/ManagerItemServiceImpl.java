@@ -3,6 +3,7 @@ package com.bjsxt.ego.manager.service.impl;
 import com.bjsxt.ego.beans.*;
 import com.bjsxt.ego.manager.service.ManagerItemService;
 import com.bjsxt.ego.rpc.pojo.TbItem;
+import com.bjsxt.ego.rpc.pojo.TbItemDesc;
 import com.bjsxt.ego.rpc.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -127,7 +129,42 @@ public class ManagerItemServiceImpl implements ManagerItemService {
             result.setMessage("error");
 
         }
+        System.out.println(result);
 
         return result;
+    }
+
+    /**
+     * 实现商品信息的发布，包含商品对象和商品描述信息
+     * @param item 商品对象
+     * @param desc 商品描述
+     * @return
+     */
+    @Override
+    public EgoResult saveItemService(TbItem item, String desc) {
+        //给Item对象封装数据:弥补从前台中获取到的数据不足，
+        //通过工具类自己产生id，满足后期的MyCat分库分表的需求，
+        // 因为MyCat分库分表时如果设置主键自增，那么每张分表的ID都会从1开始自增，那么就会造成ID重复的问题
+        Long id = IDUtils.genItemId();
+
+        // 提交的表单中没有主键ID和状态ID，需要重新进行封装
+        item.setId(id);
+        //设置状态
+        item.setStatus((byte) 1);
+        Date data = new Date();
+        //创建时间
+        item.setCreated(data);
+        //更新时间
+        item.setUpdated(data);
+
+        //创建TbItemDesc对象(商品描述表对象)
+        TbItemDesc tbItemDesc = new TbItemDesc();
+        tbItemDesc.setItemDesc(desc);
+        tbItemDesc.setItemId(id);
+        tbItemDesc.setCreated(data);
+        tbItemDesc.setUpdated(data);
+
+        //调用远程服务实现商品信息的发布
+        return itemServiceProxy.saveItem(item,tbItemDesc);
     }
 }

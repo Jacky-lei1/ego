@@ -1,36 +1,30 @@
 package com.bjsxt.ego.beans;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-/**
- * @author lvyelanshan
- * @create 2019-10-18 20:20
- */
 public class FtpUtils {
+
+
     public static void main(String[] args) {
-        /**
+
+        /***
          * 完成图片的上传，通过ftp将图片上传到图片服务器
-         */
-        String hostname = "192.168.43.131";
-        int port = 21; //linux主机中配置的vsftpd服务通过21端口访问
-        String username = "ftpuser";
-        String password = "ftpuser";
-        String pathname = "/home/ftpuser/jd";
-        //把文件上传到服务器后的名字
-        String remote = "demo.jpg";
-        InputStream local = null;
+         * **/
 
-
-
-//        uploadFile(hostname, username, password, pathname, remote, client,local);
-
+        String hostname="192.168.30.30";
+        int port=21;
+        String username="ftpuser";
+        String password="ftpuser";
+        String pathname="/home/ftpuser/jd";
+        String remote="demo.jpg";
+        InputStream local=null;
+        //uploadFile(hostname, port, username, password, pathname, remote,local);
     }
+
     public static boolean uploadFile(String hostname,
                                      int port, String username,
                                      String password, String pathname,
@@ -54,7 +48,7 @@ public class FtpUtils {
                 }
             }
 
-//            local=new FileInputStream("D:/1.jpg");
+//            local=new FileInputStream("D:/pic/1.jpg");
             //实现文件上传
             client.storeFile(remote, local);
 

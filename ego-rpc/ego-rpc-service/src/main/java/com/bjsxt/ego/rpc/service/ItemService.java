@@ -3,6 +3,7 @@ package com.bjsxt.ego.rpc.service;
 import com.bjsxt.ego.beans.EgoResult;
 import com.bjsxt.ego.beans.PageResult;
 import com.bjsxt.ego.rpc.pojo.TbItem;
+import com.bjsxt.ego.rpc.pojo.TbItemDesc;
 
 import java.util.List;
 
@@ -32,4 +33,21 @@ public interface ItemService {
      * @return
      */
     public EgoResult deleteItem(List<Long> itemIds);
+
+    /**
+     * 保存商品信息
+     * @param item：商品对象
+     * @param desc：商品描述对象
+     * @return
+     */
+    public EgoResult saveItem(TbItem item, TbItemDesc desc);
+
+
+    /**
+     * 更新商品的信息
+     * @param item：商品对象
+     * @param desc：商品描述对象
+     * @return
+     */
+    public EgoResult updateItem(TbItem item,TbItemDesc desc);
 }

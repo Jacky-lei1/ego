@@ -2,8 +2,10 @@ package com.bjsxt.ego.rpc.service.impl;
 
 import com.bjsxt.ego.beans.EgoResult;
 import com.bjsxt.ego.beans.PageResult;
+import com.bjsxt.ego.rpc.mapper.TbItemDescMapper;
 import com.bjsxt.ego.rpc.mapper.TbItemMapper;
 import com.bjsxt.ego.rpc.pojo.TbItem;
+import com.bjsxt.ego.rpc.pojo.TbItemDesc;
 import com.bjsxt.ego.rpc.pojo.TbItemExample;
 import com.bjsxt.ego.rpc.service.ItemService;
 import com.github.pagehelper.Page;
@@ -20,8 +22,12 @@ import java.util.List;
 @Service
 public class ItemServiceImpl implements ItemService {
     //注入mapper接口代理对象
+    //注入商品表的接口对象
     @Autowired
     private TbItemMapper tbItemMapper;
+    //注入商品描述表的接口对象
+    @Autowired
+    private TbItemDescMapper tbItemMapperDesc;
 
     /**
      * 商品分页查询
@@ -85,5 +91,20 @@ public class ItemServiceImpl implements ItemService {
 
         tbItemMapper.deleteByExample(example);
        return EgoResult.ok();
+    }
+
+    @Override
+    public EgoResult saveItem(TbItem item, TbItemDesc desc) {
+
+        tbItemMapper.insert(item);//插入商品
+        tbItemMapperDesc.insert(desc);//插入商品描述信息
+        return EgoResult.ok();
+    }
+
+    @Override
+    public EgoResult updateItem(TbItem item, TbItemDesc desc) {
+        this.tbItemMapper.updateByPrimaryKey(item);
+
+        return null;
     }
 }
