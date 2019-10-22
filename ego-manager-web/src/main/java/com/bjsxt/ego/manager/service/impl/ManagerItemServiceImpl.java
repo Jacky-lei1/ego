@@ -4,10 +4,8 @@ import com.bjsxt.ego.beans.*;
 import com.bjsxt.ego.manager.service.ManagerItemService;
 import com.bjsxt.ego.rpc.pojo.TbItem;
 import com.bjsxt.ego.rpc.pojo.TbItemDesc;
-import com.bjsxt.ego.rpc.pojo.TbItemParam;
 import com.bjsxt.ego.rpc.pojo.TbItemParamItem;
 import com.bjsxt.ego.rpc.service.ItemService;
-import javafx.scene.control.Tab;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -168,6 +166,7 @@ public class ManagerItemServiceImpl implements ManagerItemService {
         tbItemDesc.setUpdated(date);
 
         //调用远程服务实现商品信息的发布
+        //封装规格参数模板信息
         TbItemParamItem tbItemParamItem = new TbItemParamItem();
         tbItemParamItem.setItemId(id);
         tbItemParamItem.setParamData(paramData);
@@ -177,7 +176,7 @@ public class ManagerItemServiceImpl implements ManagerItemService {
     }
 
     @Override
-    public EgoResult updateItemService(TbItem item, String desc) {
+    public EgoResult updateItemService(TbItem item, String desc,String paramData) {
 
         Date date = new Date();
 
@@ -190,7 +189,13 @@ public class ManagerItemServiceImpl implements ManagerItemService {
         tbItemDesc.setCreated(date);
         tbItemDesc.setUpdated(date);
 
+
+        //创建
+        TbItemParamItem tbItemParamItem = new TbItemParamItem();
+        tbItemParamItem.setParamData(paramData);
+        tbItemParamItem.setItemId(item.getId());
+        tbItemParamItem.setUpdated(date);
         //调用远程服务实现商品信息的发布
-        return itemServiceProxy.updateItem(item,tbItemDesc);
+        return itemServiceProxy.updateItem(item,tbItemDesc,tbItemParamItem);
     }
 }

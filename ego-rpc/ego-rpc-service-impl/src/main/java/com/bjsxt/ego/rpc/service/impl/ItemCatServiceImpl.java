@@ -31,4 +31,12 @@ public class ItemCatServiceImpl implements ItemCatService {
         List<TbItemCat> tbItemCats = tbItemCatMapper.selectByExample(example);
         return tbItemCats;
     }
+
+    @Override
+    public List<TbItemCat> loadItemCatListService() {
+
+        TbItemCatExample example = new TbItemCatExample();
+
+        return tbItemCatMapper.selectByExample(example);
+    }
 }

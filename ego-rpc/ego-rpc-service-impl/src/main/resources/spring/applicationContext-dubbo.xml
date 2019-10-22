@@ -21,5 +21,7 @@
 	 <dubbo:service interface="com.bjsxt.ego.rpc.service.ItemCatService" ref="itemCatServiceImpl"></dubbo:service>
 	 <dubbo:service interface="com.bjsxt.ego.rpc.service.ItemDescService" ref="itemDescServiceImpl"></dubbo:service>
 	 <dubbo:service interface="com.bjsxt.ego.rpc.service.ItemParamService" ref="itemParamServiceImpl"></dubbo:service>
-
+	 <dubbo:service interface="com.bjsxt.ego.rpc.service.ParamItemService" ref="paramItemServiceImpl"></dubbo:service>
+	 <dubbo:service interface="com.bjsxt.ego.rpc.service.TbContentCateGoryService" ref="tbContentCateGoryServiceImpl"></dubbo:service>
+	 <dubbo:service interface="com.bjsxt.ego.rpc.service.TbContentService" ref="tbContentServiceImpl"></dubbo:service>
 </beans>

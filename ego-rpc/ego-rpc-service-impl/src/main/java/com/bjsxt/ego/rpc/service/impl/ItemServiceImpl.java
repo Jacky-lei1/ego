@@ -27,6 +27,7 @@ public class ItemServiceImpl implements ItemService {
     //注入商品描述表的接口对象
     @Autowired
     private TbItemDescMapper tbItemDescMapper;
+    //注入商品模板信息表接口对象，因为需要实现三张表的插入(商品信息表，商品描述表，商品模板信息表)
     @Autowired
     private TbItemParamItemMapper tbItemParamItemMapper;
     /**
@@ -93,14 +94,24 @@ public class ItemServiceImpl implements ItemService {
        return EgoResult.ok();
     }
 
+    /**
+     * 保存商品信息
+     * @param item：商品对象
+     * @param desc：商品描述对象
+     * @param itemParamItem:商品模板信息表
+     * @return
+     */
     @Override
     public EgoResult saveItem(TbItem item, TbItemDesc desc, TbItemParamItem itemParamItem) {
 
         tbItemMapper.insert(item);//插入商品
         tbItemDescMapper.insert(desc);//插入商品描述信息d
         tbItemParamItemMapper.insert(itemParamItem);
+        System.out.println("服务提供者：provider---->ItemServiceImpl---->saveItem");
+        System.out.println(itemParamItem);
         return EgoResult.ok();
     }
+
 
     /**
      * 更新商品信息
@@ -109,7 +120,7 @@ public class ItemServiceImpl implements ItemService {
      * @return
      */
     @Override
-    public EgoResult updateItem(TbItem item, TbItemDesc desc) {
+    public EgoResult updateItem(TbItem item, TbItemDesc desc,TbItemParamItem itemParamItem) {
         //更新商品基本信息
         //updateByPrimaryKeySelective:如果某个特定的属性列是空的则不会进行更新
         //updateByPrimaryKey:表示对所有属性进行更新
@@ -119,6 +130,9 @@ public class ItemServiceImpl implements ItemService {
         TbItemDescExample.Criteria criteria = example.createCriteria();
         criteria.andItemIdEqualTo(desc.getItemId());
 
+        /**
+         * 更新描述信息
+         */
         //where itemId = ?
         //查询某个商品对应的描述信息,统计where条件所满足的记录数
         Integer rows = tbItemDescMapper.countByExample(example);
@@ -132,6 +146,20 @@ public class ItemServiceImpl implements ItemService {
             //如果这列为空则不会进行更新
             this.tbItemDescMapper.updateByPrimaryKeySelective(desc);
         }
+
+
+        /**
+         * 更新商品规格参数信息
+         */
+        TbItemParamItemExample exam = new TbItemParamItemExample();
+        TbItemParamItemExample.Criteria criteria1 = exam.createCriteria();
+        //更新商品规格参数信息的条件(根据商品ID来更新)
+        criteria1.andItemIdEqualTo(itemParamItem.getItemId());
+
+        //如果表中有一个值为空就不会更新
+        tbItemParamItemMapper.updateByExampleSelective(itemParamItem, exam);
+
+
 
         return EgoResult.ok();
     }

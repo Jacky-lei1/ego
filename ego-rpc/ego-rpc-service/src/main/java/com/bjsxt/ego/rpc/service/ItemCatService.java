@@ -1,5 +1,6 @@
 package com.bjsxt.ego.rpc.service;
 
+import com.bjsxt.ego.rpc.pojo.TbContent;
 import com.bjsxt.ego.rpc.pojo.TbItemCat;
 
 import java.util.List;
@@ -16,5 +17,11 @@ public interface ItemCatService {
      * @return
      */
     public List<TbItemCat> getItemCatListByParentId(Long id);
+
+    /**
+     * 加载门户首页的商品类目
+     * @return
+     */
+    public List<TbItemCat> loadItemCatListService();
 
 }

@@ -57,7 +57,7 @@ public interface ManagerItemService {
      * @param desc 商品描述
      * @return
      */
-    public EgoResult updateItemService(TbItem item,String desc);
+    public EgoResult updateItemService(TbItem item,String desc,String paramData);
 
 
 }

@@ -26,11 +26,13 @@ $(function(){
         onAfterEdit : function(node){
         	var _tree = $(this);
         	if(node.id == 0){
-        		// 新增节点
+        		// 新增节点，parentId：当前点击的节点的ID
         		$.post("/content/category/create",{parentId:node.parentId,name:node.text},function(data){
+        		    /*EgoResult序列化成一个json对象响应回来*/
         			if(data.status == 200){
         				_tree.tree("update",{
             				target : node.target,
+                            /*从这个EgoResult中能取到这个父节点的信息还能取到新增的节点的ID*/
             				id : data.data.id
             			});
         			}else{

@@ -8,10 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ego-common" />
         <module name="ego-manager-web" />
+        <module name="ego-portal-web" />
         <module name="ego-rpc-mapper" />
         <module name="ego-rpc-pojo" />
         <module name="ego-rpc-service" />
         <module name="ego-rpc-service-impl" />
+        <module name="jedisClusterDemo" />
       </profile>
     </annotationProcessing>
   </component>
