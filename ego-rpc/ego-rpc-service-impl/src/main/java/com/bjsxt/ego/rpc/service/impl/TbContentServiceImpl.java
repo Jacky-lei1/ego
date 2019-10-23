@@ -96,4 +96,25 @@ public class TbContentServiceImpl implements TbContentService {
         }
         return null;
     }
+
+    @Override
+    public List<TbContent> loadTbContentListByCidService(Long id) {
+        try {
+            TbContentExample example = new TbContentExample();
+            //where category_id = ?
+            TbContentExample.Criteria criteria = example.createCriteria();
+            criteria.andCategoryIdEqualTo(id);
+
+            List<TbContent> list = tbContentMapper.selectByExampleWithBLOBs(example);
+
+            System.out.println("后台服务提供者数据库中查询到的数据：------->");
+            for (TbContent content : list) {
+                System.out.println(content);
+            }
+            return list;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

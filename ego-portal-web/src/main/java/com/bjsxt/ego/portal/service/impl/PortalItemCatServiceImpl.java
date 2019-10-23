@@ -7,7 +7,10 @@ import com.bjsxt.ego.portal.service.PortalItemCatService;
 import com.bjsxt.ego.rpc.pojo.TbItemCat;
 import com.bjsxt.ego.rpc.service.ItemCatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import redis.clients.jedis.JedisCluster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +21,35 @@ import java.util.List;
  */
 @Service
 public class PortalItemCatServiceImpl implements PortalItemCatService {
+
+    /*将属性文件中的itemCatkey中的值赋值为属性文件中ITEM_CAT对应的值:
+    ITEM_CAT_KEY,作为Redis缓存中的key存在*/
+    @Value("${ITEM_CAT}")
+    private String itemCatkey;
+
+    //注入一个Redis的集群访问对象JedisCluster对象
+    @Autowired
+    private JedisCluster jedisCluster;
+
     //注入远程代理对象
     @Autowired(required = false)
     private ItemCatService itemCatServiceProxy;
 
+    /**
+     * 加载商品首页的类目
+     * @return
+     */
     @Override
     public String loadItemCatService() {
+
+        String jsonStr = jedisCluster.get(itemCatkey);
+
+        if (!StringUtils.isEmpty(jsonStr)){
+            //如果获得到的数据不是空的则直接返回就行
+            return jsonStr;
+        }
+
+
         List<TbItemCat> list = itemCatServiceProxy.loadItemCatListService();
 
         //创建CatResult对象
@@ -33,11 +59,11 @@ public class PortalItemCatServiceImpl implements PortalItemCatService {
         List<?> data = getChildren(0L, list);
 
         result.setData(data);
-        //将result对象序列化成json字符串
+        //将result对象序列化成json字符串, 将List转化为符合前端规范的数据格式
         String str = JsonUtils.objectToJson(result);
 
-        //将List转化为符合前端规范的数据格式
-
+        //将查出来的str数据缓存到redis数据库中
+        jedisCluster.set(itemCatkey,str);
         return str;
     }
 

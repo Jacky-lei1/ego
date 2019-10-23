@@ -13,6 +13,7 @@
         <module name="ego-rpc-pojo" />
         <module name="ego-rpc-service" />
         <module name="ego-rpc-service-impl" />
+        <module name="ego-search-web" />
         <module name="jedisClusterDemo" />
       </profile>
     </annotationProcessing>

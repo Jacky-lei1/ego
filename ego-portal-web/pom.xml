@@ -74,6 +74,13 @@
             <artifactId>commons-fileupload</artifactId>
         </dependency>
 
+        <!--需要将查询到的数据放到Redis数据库中-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.7.2</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

@@ -38,4 +38,11 @@ public interface TbContentService {
      * @return
      */
     public EgoResult updateTbContentService(TbContent tbContent);
+
+    /**
+     * 加载某个类目对应的内容列表（根据ID查询大广告位的信息，实现主页图片的轮播：tb_content表）
+     * @param id
+     * @return
+     */
+    public List<TbContent> loadTbContentListByCidService(Long id);
 }
