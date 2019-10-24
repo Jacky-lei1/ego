@@ -22,7 +22,7 @@ import java.util.List;
 @Service
 public class PortalItemCatServiceImpl implements PortalItemCatService {
 
-    /*将属性文件中的itemCatkey中的值赋值为属性文件中ITEM_CAT对应的值:
+    /*将itemCatkey中的值赋值为属性文件中ITEM_CAT对应的值:
     ITEM_CAT_KEY,作为Redis缓存中的key存在*/
     @Value("${ITEM_CAT}")
     private String itemCatkey;

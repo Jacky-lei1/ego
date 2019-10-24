@@ -163,4 +163,15 @@ public class ItemServiceImpl implements ItemService {
 
         return EgoResult.ok();
     }
+
+    /**
+     * 根据ID查询商品信息
+     * @param id
+     * @return
+     */
+    @Override
+    public TbItem loadTbItemById(Long id) {
+
+        return tbItemMapper.selectByPrimaryKey(id);
+    }
 }

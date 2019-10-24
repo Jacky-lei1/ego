@@ -180,4 +180,8 @@ public class TbItem implements Serializable {
         result = prime * result + ((getUpdated() == null) ? 0 : getUpdated().hashCode());
         return result;
     }
+
+    public String[] getImages(){
+        return image.split(",");
+    }
 }

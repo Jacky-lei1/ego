@@ -15,6 +15,7 @@
         <module>jedisClusterDemo</module>
         <module>ego-portal-web</module>
         <module>ego-search-web</module>
+        <module>ego-sso-web</module>
     </modules>
 
 
