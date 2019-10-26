@@ -1,5 +1,6 @@
 package com.bjsxt.ego.rpc.service.impl;
 
+import com.alibaba.dubbo.rpc.cluster.Cluster;
 import com.bjsxt.ego.beans.EgoResult;
 import com.bjsxt.ego.rpc.mapper.TbUserMapper;
 import com.bjsxt.ego.rpc.pojo.TbUser;
@@ -76,12 +77,18 @@ public class TbUserServiceImpl implements TbUserService {
     public TbUser selectUserByUserName(String uname) {
         TbUserExample example = new TbUserExample();
         TbUserExample.Criteria criteria = example.createCriteria();
+
         criteria.andUsernameEqualTo(uname);
+
         List<TbUser> list = tbUserMapper.selectByExample(example);
         //虽然返回的是一个list，但是用户名查询出来必须是唯一的
         if(list!=null&&list.size()==1){
-            return list.get(0);
+            TbUser tbUser = list.get(0);
+            System.out.println("服务提供者返回的tbUser：-->"+tbUser);
+            return tbUser;
         }
         return null;
     }
+
+
 }

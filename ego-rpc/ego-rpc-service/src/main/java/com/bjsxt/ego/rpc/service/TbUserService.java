@@ -30,4 +30,6 @@ public interface TbUserService {
      * @return
      */
     public TbUser selectUserByUserName(String uname);
+
+
 }

@@ -182,7 +182,7 @@
 			});
 		},
 		login:function() {
-			 location.href = "/sso/login";
+			 location.href = "/login";
 			 return false;
 		},
 		reg:function() {

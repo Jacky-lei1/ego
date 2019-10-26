@@ -181,6 +181,8 @@ public class TbItem implements Serializable {
         return result;
     }
 
+    private String[] images;
+
     public String[] getImages(){
         return image.split(",");
     }

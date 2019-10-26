@@ -25,4 +25,5 @@
 	 <dubbo:service interface="com.bjsxt.ego.rpc.service.TbContentCateGoryService" ref="tbContentCateGoryServiceImpl"></dubbo:service>
 	 <dubbo:service interface="com.bjsxt.ego.rpc.service.TbContentService" ref="tbContentServiceImpl"></dubbo:service>
 	 <dubbo:service interface="com.bjsxt.ego.rpc.service.TbUserService" ref="tbUserServiceImpl"></dubbo:service>
+	<dubbo:service interface="com.bjsxt.ego.rpc.service.TbOrderService" ref="tbOrderServiceImpl"></dubbo:service>
 </beans>

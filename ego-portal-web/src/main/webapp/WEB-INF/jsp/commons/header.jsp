@@ -22,7 +22,8 @@
 		<!--search end-->
 		<div id="my360buy-2013">
 			<dl>
-				<dt class="ld"><s></s><a href="http://localhost:8084/user/showLogin" clstag="homepage|keycount|home2012|04a">我的易购</a><b></b></dt>
+				<dt class="ld"><s></s><a href="http://localhost:8084/user/showLogin" 
+				clstag="homepage|keycount|home2012|04a">我的易购</a><b></b></dt>
 				<dd>
 					<div class="loading-style1"><b></b>加载中，请稍候...</div>
 				</dd>
@@ -46,7 +47,8 @@
 		<div id="nav-2013">
 			<div id="categorys-2013" class="categorys-2014">
 				<div class="mt ld">
-					<h2><a href="http://www.jd.com/allSort.aspx" clstag="homepage|keycount|home2013|06a">全部商品分类<b></b></a></h2>
+					<h2><a href="#" 
+					clstag="homepage|keycount|home2013|06a">全部商品分类<b></b></a></h2>
 				</div>
 				<div id="_JD_ALLSORT" class="mc">
 					<div class="item fore1">
