@@ -42,5 +42,5 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPc" />
 	</aop:config>
 
-	<jdbc:embedded-database id="dataSource"/>
+	<!--<jdbc:embedded-database id="dataSource"/>-->
 </beans>

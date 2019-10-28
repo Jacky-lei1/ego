@@ -1,15 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>ego-rpc</artifactId>
         <groupId>com.bjsxt.ego</groupId>
+        <artifactId>ego-rpc</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-
     <artifactId>ego-rpc-service-impl</artifactId>
+
 
     <dependencies>
         <dependency>
@@ -22,8 +19,6 @@
             <artifactId>ego-rpc-service</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -104,19 +99,24 @@
             <groupId>org.apache.solr</groupId>
             <artifactId>solr-solrj</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.3</version>
+        </dependency>
     </dependencies>
+
     <build>
-        <!-- <plugins>
-            指定项目的打包插件信息
+        <plugins>
+            <!-- 指定项目的打包插件信息 -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
-                    指定打包描述文件的位置：相对项目根目录的路径
-                    assembly打包的描述文件
+                    <!-- 指定打包描述文件的位置：相对项目根目录的路径 -->
+                    <!-- assembly打包的描述文件 -->
                     <descriptor>assembly/assembly.xml</descriptor>
                 </configuration>
                 <executions>
-                    mvn package的时候打包
                     <execution>
                         <id>make-assembly</id>
                         <phase>package</phase>
@@ -126,8 +126,8 @@
                     </execution>
                 </executions>
             </plugin>
-            </plugins> -->
-        <!-- dubbo加载spring的配置文件的时候，是从META-INF/spring开始查找 -->
+        </plugins>
+
         <resources>
             <resource>
                 <!-- 指定从哪个文件夹拷贝 -->
@@ -148,7 +148,5 @@
                 </includes>
             </resource>
         </resources>
-
-
     </build>
 </project>

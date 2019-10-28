@@ -8,21 +8,18 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
    
    <!-- 加载属性文件 -->
-   <context:property-placeholder location="classpath:resources/*.properties"/>
+   <!--<context:property-placeholder location="classpath:resources/db.properties"/>-->
    
-   <!-- 获取数据源  德鲁伊 -->
-   <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
-    destroy-method="close">
+   <!-- 获取数据源 -->
+   <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
       <!-- driverClass -->
-      <property name="driverClassName" value="${jdbc.driver}"></property>
+      <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
       <!-- jdbc的url -->
-      <property name="url" value="${jdbc.url}"></property>
+      <property name="url" value="jdbc:mysql://192.168.41.61:3306/ego?useSSL=true"></property>
       <!-- jdbc的用户名 -->
-      <property name="username" value="${jdbc.user}"></property>
+      <property name="username" value="root"></property>
       <!-- jdbc的密码 -->
-      <property name="password" value="${jdbc.password}"></property>
-      <!-- 数据库连接池的最大连接数 -->
-      <property name="maxActive" value="${druid.maxActive}"></property>
+      <property name="password" value="3874569253"></property>
    </bean>
    
    <!-- sqlSessionFactory -->
